@@ -4,8 +4,7 @@ import { FormGroup, Label } from "reactstrap";
 import firebase from "../../Components/Firebase/firebaseSetup";
 import { Link } from "react-router-dom";
 
-
-class Login extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -16,11 +15,16 @@ class Login extends Component {
       <article className="themeBgDark">
         <div>
           <div className="auth-form-outer">
-            <h1 className="uppercase">Sign in</h1>
+            <h1 className="uppercase">Sign Up</h1>
             <Formik
-              initialValues={{ email: "", password: "" }}
+              initialValues={{ email: "", password: "", name: "" }}
               validate={values => {
                 const errors = {};
+                if(!values.name){
+                    errors.name = "user name is required."
+                }else if(values.name.length<4){
+                    errors.name = "user name must be 4 characters long."
+                } 
                 if (!values.email) {
                   errors.email = "email address is required.";
                 } else if (
@@ -39,10 +43,21 @@ class Login extends Component {
                 setTimeout(() => {
                   firebase
                     .auth()
-                    .signInWithEmailAndPassword(values.email, values.password)
+                    .createUserWithEmailAndPassword(
+                      values.email,
+                      values.password
+                    )
                     .then(user => {
-                      this.notify()
-                      this.props.history.push("/home");
+                      if (user) {
+                        firebase
+                          .auth()
+                          .currentUser.updateProfile({
+                            displayName: values.name
+                          })
+                          .then(s => {
+                            this.props.history.push("/home");
+                          });
+                      }
                     })
                     .catch(error => {
                       this.setState({ error: error });
@@ -53,6 +68,22 @@ class Login extends Component {
             >
               {({ isSubmitting }) => (
                 <Form>
+                  <FormGroup>
+                    <Label>Enter User Name</Label>
+                    <div className="txt-field">
+                      <Field
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        placeholder="Fakhir"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </FormGroup>
                   <FormGroup>
                     <Label>Enter Email</Label>
                     <div className="txt-field">
@@ -86,7 +117,7 @@ class Login extends Component {
                     />
                   </FormGroup>
                   <button type="submit">Submit</button>
-                  <Link to="/signup">Sign Up</Link>
+                  <Link to="/login">Already a user?</Link>
                 </Form>
               )}
             </Formik>
@@ -97,4 +128,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default SignUp;
