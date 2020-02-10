@@ -106,7 +106,7 @@ class DamsMap extends Component {
         maxZoom={19}
         padding={200}
         animate={true}
-        style={{ height: "100vh" }}
+        style={{ height: "88vh" }}
         center={[30.3753, 69.3451]}
         zoom={this.state.zoom}
       >
