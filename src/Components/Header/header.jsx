@@ -4,7 +4,6 @@ import {
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Nav,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -34,13 +33,12 @@ class Header extends Component {
   render() {
       const { isOpen, currentUser } = this.state;
     return (
-      <div>
-        <Navbar color="light" light expand="md">
+      <header>
+        <Navbar color="dark" expand="md">
           <NavbarBrand>Flood Monitoring System</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav navbar className="alignAvatar">
-            <UncontrolledDropdown className="fright">
+            <UncontrolledDropdown className='profile-dropdown'>
                 <DropdownToggle nav>
                   <img className="avatar" src={userAvatar}  alt="userAvatar"/>
                 </DropdownToggle>
@@ -54,10 +52,9 @@ class Header extends Component {
                   <DropdownItem onClick={() => firebase.auth().signOut()}>Logout</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              </Nav>
           </Collapse>
         </Navbar>
-      </div>
+      </header>
     );
   }
 }

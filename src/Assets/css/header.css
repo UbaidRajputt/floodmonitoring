@@ -1,43 +1,82 @@
-.navbar-expand-md .navbar-collapse {
-    display: flex!important;
-    flex-basis: auto;
-    justify-content: flex-end;
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: var(--hHeight);
+    z-index: 1111;
+}
+header .bg-dark {
+    background-color: var(--themeColor) !important;
 }
 
-.dropdown-menu.show {
-    display: block;
-    background: #086793;
-}
-.navbar-brand {
-    font-size: 1.75rem;
-    font-weight: 700;
+header .navbar {
+    padding: var(--hPaddTB) var(--hPaddRL);
 }
 
-.dropdown-item {
-    color: aliceblue;
-    padding-left: 50px;
+@media (min-width:768px) {
+
+    header .navbar-expand-md {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    header .navbar-expand-md .navbar-collapse {
+        flex-grow: initial;
+    }
+
 }
 
-.bg-light {
-    background-color: #086793!important;
+.profile-dropdown .nav-link {
+    padding: 0;
 }
 
-.navbar-light .navbar-brand {
-    color: white;
+.navbar-brand,
+.navbar-brand:not([href]) {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--white);
+    padding: 0;
 }
-.navbar-light .navbar-brand:hover {
-    color: white;
+
+.navbar-brand:hover,
+.navbar-brand:not([href]):hover {
+    color: var(--white);
 }
 
 .avatar {
     border-radius: 50%; 
-    height: 35px;
+    height: 30px;
+}
+
+.profile-dropdown .dropdown-menu {
+    background-color: var(--themeColor);
+    padding: 0;
 }
 
 .username {
-    color: aliceblue;
-    padding-left: 40px;
-    font-weight: 700;
-    font-size: 18px;
+    text-align: center;
+    color: var(--white);
+    padding: var(--hPaddTB);
+}
+
+.profile-dropdown .dropdown-divider {
+    margin: 0;
+}
+
+.profile-dropdown button {
+    text-align: center;
+    color: var(--white);
+    padding: var(--hPaddTB);
+    height: auto;
+}
+
+.profile-dropdown button:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: var(--white);
+}
+
+.profile-dropdown button::before {
+    display: none;
 }
 

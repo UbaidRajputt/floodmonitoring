@@ -1,16 +1,14 @@
 .footer {
-    left: 0;
-    bottom: 0;
     width: 100%;
-    height: 60px;
-    background-color:#086723;
-    color: white;
-    text-align: end;
+    padding: var(--hPaddTB) var(--hPaddRL);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--paraColor);
+    height: var(--fHeight);
 }
 
 .footer div {
-    padding-top: 15px;
-    padding-right: 10px;
-    font-size: 1.30rem;
-    color: aliceblue;
+    font-size: 0.85rem;
+    color: var(--white);
 }
