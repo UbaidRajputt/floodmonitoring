@@ -1,0 +1,43 @@
+.navbar-expand-md .navbar-collapse {
+    display: flex!important;
+    flex-basis: auto;
+    justify-content: flex-end;
+}
+
+.dropdown-menu.show {
+    display: block;
+    background: #086793;
+}
+.navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.dropdown-item {
+    color: aliceblue;
+    padding-left: 50px;
+}
+
+.bg-light {
+    background-color: #086793!important;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+.navbar-light .navbar-brand:hover {
+    color: white;
+}
+
+.avatar {
+    border-radius: 50%; 
+    height: 35px;
+}
+
+.username {
+    color: aliceblue;
+    padding-left: 40px;
+    font-weight: 700;
+    font-size: 18px;
+}
+

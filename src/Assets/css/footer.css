@@ -1,0 +1,16 @@
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color:#086723;
+    color: white;
+    text-align: end;
+}
+
+.footer div {
+    padding-top: 15px;
+    padding-right: 10px;
+    font-size: 1.30rem;
+    color: aliceblue;
+}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
 import leaflet from "leaflet";
 import { Map, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
-import dam from "../../Assets/dam.png";
+import dam from "../../Assets/water-drop.jpg";
 import pakistanLocation from "../../Utilities/Constants/pakistan-geolocation.json";
 
 import { toast, ToastContainer } from 'react-toastify';
@@ -13,7 +13,7 @@ export const pointerIcon = new leaflet.Icon({
   iconUrl: dam,
   iconAnchor: [5, 40],
   popupAnchor: [10, -44],
-  iconSize: [35, 65],
+  iconSize: [26, 36],
   shadowSize: [68, 95],
   shadowAnchor: [20, 92]
 });
@@ -106,7 +106,7 @@ class DamsMap extends Component {
         maxZoom={19}
         padding={200}
         animate={true}
-        style={{ height: "100vh" }}
+        style={{ height: "88vh" }}
         center={[30.3753, 69.3451]}
         zoom={this.state.zoom}
       >
