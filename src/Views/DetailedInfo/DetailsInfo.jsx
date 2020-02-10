@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Input, Button } from "reactstrap";
 import Papa from "papaparse";
 import firebase from "../../Components/Firebase/firebaseSetup";
+import axios from 'axios';
+
 
 class DetailsInfo extends Component {
   constructor(props) {
@@ -10,9 +12,23 @@ class DetailsInfo extends Component {
       file: "",
       error: "",
       list: [],
-      data: []
+      data: [],
+      message: {
+        to:"lalal"
+      }
     };
   }
+
+  sendSms = () => {
+    const body = "lalala"
+    axios.post('http://localhost:3001/messages', body)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  } 
 
   handleFileChange = e => {
     this.setState({ [e.target.name]: e.target.files[0] });
@@ -73,6 +89,8 @@ class DetailsInfo extends Component {
               );
             })}
         </ul>
+
+        <Button onClick={this.sendSms} >Send Sms</Button>
 
         <button onClick={() => { firebase.auth().signOut()} }> logout </button>
       </div>
