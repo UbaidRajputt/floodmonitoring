@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Header from './Components/Header/header';
+import Footer from './Components/Footer/footer';
 import Landing from "./Views/Landing/landing";
 import {
   BrowserRouter as Router,
@@ -6,7 +8,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import DetailsInfo from "./Views/DetailedInfo/DetailsInfo";
+import Details from "./Views/DetailedInfo/details";
 import SignUp from "./Views/Auth/signup";
 import Login from "./Views/Auth/login";
 import firebase from "./Components/Firebase/firebaseSetup";
@@ -36,15 +38,21 @@ class App extends Component {
       <div className="App">
         <Router>
           {authenticated ? (
-            <Switch>
-              <Route path="/home" name="landing" component={Landing} />
-              <Route
-                path="/charts/:name"
-                name="charts"
-                component={DetailsInfo}
-              />
-              <Redirect from="/" to="/home" />
-            </Switch>
+            <React.Fragment>
+              <Header />
+              <main>
+                <Switch>
+                  <Route path="/home" name="landing" component={Landing} />
+                  <Route
+                    path="/charts/:name"
+                    name="charts"
+                    component={Details}
+                  />
+                  <Redirect from="/" to="/home" />
+                </Switch>
+              </main>
+              <Footer />
+            </React.Fragment>
           ) : (
             <Switch>
               <Route path="/login" name="login" component={Login} />

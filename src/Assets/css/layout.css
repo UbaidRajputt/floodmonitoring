@@ -151,3 +151,8 @@ button:hover:before, .button:hover:before {
 .text-danger {
   color: var(--theme-danger);
 }
+
+main {
+  padding-top: var(--hHeight);
+  height: calc(100% - var(--fHeight));
+}

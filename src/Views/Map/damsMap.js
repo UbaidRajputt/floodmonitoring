@@ -1,19 +1,17 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
-import "leaflet/dist/leaflet.css";
 import leaflet from "leaflet";
 import { Map, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
-import dam from "../../Assets/water-drop.jpg";
+import damPin from "../../Assets/dampin.png";
 import pakistanLocation from "../../Utilities/Constants/pakistan-geolocation.json";
 
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const pointerIcon = new leaflet.Icon({
-  iconUrl: dam,
+  iconUrl: damPin,
   iconAnchor: [5, 40],
   popupAnchor: [10, -44],
-  iconSize: [26, 36],
+  iconSize: [32, 52],
   shadowSize: [68, 95],
   shadowAnchor: [20, 92]
 });
@@ -118,7 +116,7 @@ class DamsMap extends Component {
           data={pakistanLocation}
           style={() => ({
             color: "#FFFFF0",
-            weight: 10,
+            weight: 3,
             fillColor: "green",
             fillOpacity: 0.6,
             opacity: 1
