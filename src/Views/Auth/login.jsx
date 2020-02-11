@@ -3,18 +3,22 @@ import { Formik, Form, ErrorMessage, Field } from "formik";
 import { FormGroup, Label } from "reactstrap";
 import firebase from "../../Components/Firebase/firebaseSetup";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      admin: null
+    };
   }
 
   render() {
     return (
       <article className="themeBgDark">
         <div>
+          <ToastContainer />
           <div className="auth-form-outer">
             <h1 className="uppercase">Sign in</h1>
             <Formik
@@ -41,10 +45,17 @@ class Login extends Component {
                     .auth()
                     .signInWithEmailAndPassword(values.email, values.password)
                     .then(user => {
-                      this.notify()
-                      this.props.history.push("/home");
+                      if(user.user.email==="admin@admin.com"){
+                        this.props.history.push('/home');
+                      }else{
+                        console.log("lalalalla")
+                        this.props.history.push("/home"); 
+                      }
                     })
                     .catch(error => {
+                      toast.error("Invalid email or password!", {
+                        position: toast.POSITION.TOP_RIGHT
+                      });
                       this.setState({ error: error });
                     });
                   setSubmitting(false);

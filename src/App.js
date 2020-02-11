@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import Header from './Components/Header/header';
-import Footer from './Components/Footer/footer';
 import Landing from "./Views/Landing/landing";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from "react-router-dom";
-import Details from "./Views/DetailedInfo/details";
+import Details from "./Views/DetailedInfo/DetailsInfo";
 import SignUp from "./Views/Auth/signup";
 import Login from "./Views/Auth/login";
 import firebase from "./Components/Firebase/firebaseSetup";
+import ProtectedRoute from "./ProtectedRoute";
 
 class App extends Component {
   constructor(props) {
@@ -37,29 +35,17 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          {authenticated ? (
-            <React.Fragment>
-              <Header />
-              <main>
-                <Switch>
-                  <Route path="/home" name="landing" component={Landing} />
-                  <Route
-                    path="/charts/:name"
-                    name="charts"
-                    component={Details}
-                  />
-                  <Redirect from="/" to="/home" />
-                </Switch>
-              </main>
-              <Footer />
-            </React.Fragment>
-          ) : (
-            <Switch>
-              <Route path="/login" name="login" component={Login} />
-              <Route path="/signup" name="signup" component={SignUp} />
-              <Redirect from="/" to="/login" />
-            </Switch>
-          )}
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+            <ProtectedRoute authenticated={authenticated} path="/home" component={Landing} />
+            <ProtectedRoute
+              authenticated={authenticated}
+              path="/charts/:name"
+              component={Details}
+            />
+          </Switch>
         </Router>
       </div>
     );

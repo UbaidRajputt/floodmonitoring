@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import userAvatar from '../../Assets/user-avatar.png'
 import firebase from '../Firebase/firebaseSetup';
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    let currentUser = firebase.auth().currentUser.displayName
+    let currentUser = firebase.auth().currentUser ? firebase.auth().currentUser.displayName : "User"
     if(currentUser){
         this.setState({ currentUser })
     }
@@ -49,7 +50,9 @@ class Header extends Component {
                   }
                 </div>
                 <DropdownItem divider />
-                  <DropdownItem onClick={() => firebase.auth().signOut()}>Logout</DropdownItem>
+                  <DropdownItem>
+                    <Link onClick={() => firebase.auth().signOut()} to="/login">Logout</Link>
+                  </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
           </Collapse>

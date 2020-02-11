@@ -80,3 +80,11 @@ header .navbar {
     display: none;
 }
 
+.dropdown-item a {
+    color: aliceblue;
+}
+
+.dropdown-item a:hover {
+    color: aliceblue;
+    text-decoration: none;
+}

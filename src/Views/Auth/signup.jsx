@@ -3,6 +3,7 @@ import { Formik, Form, ErrorMessage, Field } from "formik";
 import { FormGroup, Label } from "reactstrap";
 import firebase from "../../Components/Firebase/firebaseSetup";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 
 class SignUp extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class SignUp extends Component {
     return (
       <article className="themeBgDark">
         <div>
+          <ToastContainer />
           <div className="auth-form-outer">
             <h1 className="uppercase">Sign Up</h1>
             <Formik
@@ -60,6 +62,9 @@ class SignUp extends Component {
                       }
                     })
                     .catch(error => {
+                      toast.error("Email alredy exists!", {
+                        position: toast.POSITION.TOP_RIGHT
+                      });
                       this.setState({ error: error });
                     });
                   setSubmitting(false);
