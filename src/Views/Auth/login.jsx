@@ -85,8 +85,14 @@ class Login extends Component {
                       className="text-danger"
                     />
                   </FormGroup>
-                  <button type="submit">Submit</button>
-                  <Link to="/signup">Sign Up</Link>
+                  <div className='flex fspace align-item-center'>
+                    <div className='fitem'>
+                      <button className='button' type="submit">Sign In</button>
+                    </div>
+                    <div className='fitem'>
+                      <p className='txt-plus-link'><span>Don't have an account? </span> <Link to="/signup">Sign Up</Link></p>
+                    </div>
+                  </div>
                 </Form>
               )}
             </Formik>
