@@ -12,16 +12,17 @@ html, body, #root, .App {
   height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p, ul, ol, li, button, label {
   margin: 0;
   padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
   color: var(--headingColor);
   font-weight: 400;
 }
 
 p {
-  margin: 0;
-  padding: 0;
   color: var(--paraColor);
   font-weight: 400;
 }
@@ -36,6 +37,27 @@ b {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.fspace {
+  margin-right: var(--tespaceNm);
+  margin-left: var(--tespaceNm);
+}
+
+.fspace .fitem {
+  padding: var(--tespace);
 }
 
 .themeBgDark {
@@ -71,7 +93,6 @@ b {
 
 .themeBgDark button, .themeBgDark .button {
   color: var(--white);
-  margin-top: 1rem;
 }
 
 .themeBgDark button:hover, .themeBgDark .button:hover {
@@ -124,7 +145,7 @@ button, .button {
   z-index: 1;
 }
 
-button:before, .button:before {
+.button:before {
   content: '';
   position: absolute;
   top: 0;
@@ -144,8 +165,18 @@ button:active:focus, .button:active:focus {
   box-shadow: none;
 }
 
-button:hover:before, .button:hover:before {
+.button:hover:before {
   clip-path: var(--notch-bg);
+}
+
+.auth-form-outer .txt-plus-link {
+  color: var(--white);
+}
+.auth-form-outer .txt-plus-link span {
+  opacity: 0.7;
+}
+.auth-form-outer .txt-plus-link a {
+  color: var(--white);
 }
 
 .text-danger {
@@ -154,5 +185,35 @@ button:hover:before, .button:hover:before {
 
 main {
   padding-top: var(--hHeight);
-  height: calc(100% - var(--fHeight));
+  min-height: calc(100% - var(--fHeight));
+  background-color: rgba(var(--theme-r), var(--theme-g), var(--theme-b), 0.05);
+}
+
+.board {
+  padding-right: var(--tPaddRL);
+  padding-left: var(--tPaddRL);
+}
+
+.board > h2 {
+  font-size: 1.5rem;
+  padding: 1rem 0 0;
+  font-weight: 700;
+}
+
+.chart-filter {
+  text-align: center;
+}
+.chart-filter .button {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.chart-filter .button:before {
+  background-color: var(--themeColor);
+}
+.chart-filter .button:hover,
+.chart-filter .button.active {
+  color: var(--white);
+}
+.chart-filter .button.active:before {
+  clip-path: var(--notch-bg);
 }
