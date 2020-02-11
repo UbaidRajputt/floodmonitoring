@@ -9,11 +9,17 @@
   --themeColor: #0867D5;
   --themeBgDark: #23394F;
   --theme-danger: red;
+  --theme-r: 62;
+  --theme-g: 71;
+  --theme-b: 81;
   --txtField: calc(100% - 15px);
   --txtFieldA: calc(100% - 14px);
   --notch-outline: polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 2px,2px 2px,2px calc(100% - 2px),calc(100% - 11px) calc(100% - 2px),calc(100% - 2px) calc(100% - 11px),calc(100% - 2px) 2px,0 2px);
   --notch-bg: polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%);
   --radial-gradient-bg: -webkit-radial-gradient(50% 50%, circle farthest-corner, rgba(8, 103, 213, 1) 0%, rgba(35, 57, 79, 1) 100%);
+  --tespaceNm: -10px;
+  --tespace: 10px;
+  --tPaddRL: 50px;
   --hPaddTB: 10px;
   --hPaddRL: 50px;
   --hHeight: 50px;
