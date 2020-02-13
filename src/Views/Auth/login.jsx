@@ -48,12 +48,11 @@ class Login extends Component {
                       if(user.user.email==="admin@admin.com"){
                         this.props.history.push('/home');
                       }else{
-                        console.log("lalalalla")
                         this.props.history.push("/home"); 
                       }
                     })
                     .catch(error => {
-                      toast.error("Invalid email or password!", {
+                      toast.error("Email does not exists!", {
                         position: toast.POSITION.TOP_RIGHT
                       });
                       this.setState({ error: error });

@@ -19,7 +19,7 @@ class SignUp extends Component {
           <div className="auth-form-outer">
             <h1 className="uppercase">Sign Up</h1>
             <Formik
-              initialValues={{ email: "", password: "", name: "" }}
+              initialValues={{ email: "", password: "", name: "", phone: "" }}
               validate={values => {
                 const errors = {};
                 if(!values.name){
@@ -39,6 +39,11 @@ class SignUp extends Component {
                 } else if (values.password.length < 8) {
                   errors.password = "password must be 8 digit.";
                 }
+                if (!values.phone){
+                  errors.phone = "phone number field is empty.";
+                } else if (!/^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/.test(values.phone)){
+                  errors.phone = "number is invalid, must start with +92";
+                }
                 return errors;
               }}
               onSubmit={(values, { setSubmitting }) => {
@@ -54,14 +59,17 @@ class SignUp extends Component {
                         firebase
                           .auth()
                           .currentUser.updateProfile({
-                            displayName: values.name
+                            displayName: values.name,
+                            phoneNumber: values.phone
                           })
                           .then(s => {
+                            firebase
+                            .database().ref("UserDetails/").child(values.name).set({ name: values.name, email: values.email , phone: values.phone});
                             this.props.history.push("/home");
                           });
                       }
-                    })
-                    .catch(error => {
+                    }).catch(error => {
+                      console.log(error)
                       toast.error("Email alredy exists!", {
                         position: toast.POSITION.TOP_RIGHT
                       });
@@ -117,6 +125,22 @@ class SignUp extends Component {
                     </div>
                     <ErrorMessage
                       name="password"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label>Enter Phone Number</Label>
+                    <div className="txt-field">
+                      <Field
+                        type="text"
+                        name="phone"
+                        className="form-control"
+                        placeholder="+923331234567"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="phone"
                       component="div"
                       className="text-danger"
                     />

@@ -5,11 +5,12 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Details from "./Views/DetailedInfo/DetailsInfo";
+import Details from "./Views/DetailedInfo/charts";
 import SignUp from "./Views/Auth/signup";
 import Login from "./Views/Auth/login";
 import firebase from "./Components/Firebase/firebaseSetup";
 import ProtectedRoute from "./ProtectedRoute";
+import AdminPanel from "./Views/AdminPanel/admin";
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={AdminPanel} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <ProtectedRoute authenticated={authenticated} path="/home" component={Landing} />
@@ -45,6 +46,7 @@ class App extends Component {
               path="/charts/:name"
               component={Details}
             />
+            {/* <ProtectedRoute authenticated={authenticated} path="/admin" component={AdminPanel} /> */}
           </Switch>
         </Router>
       </div>

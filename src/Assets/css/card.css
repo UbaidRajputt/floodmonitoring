@@ -4,7 +4,7 @@
 }
 .out-card .card .card-header {
   padding: var(--hPaddTB);
-  border-top: 3px solid var(--themeColor);
+  border-top: 6px solid #F07409;
   background-color: rgba(var(--theme-r), var(--theme-g), var(--theme-b), 0.1);
   font-weight: 600;
 }

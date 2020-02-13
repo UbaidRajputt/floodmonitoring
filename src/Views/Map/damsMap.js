@@ -19,8 +19,8 @@ export const pointerIcon = new leaflet.Icon({
 const markers = [
   {
     key: "marker1",
-    position: [32.099, 69.8819],
-    content: "Gomal Zam Dam",
+    position: [34.0105, 71.9876],
+    content: "Nowshera Dam",
     icon: pointerIcon
   },
   {

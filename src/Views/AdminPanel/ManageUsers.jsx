@@ -1,0 +1,78 @@
+import React, { Component } from "react";
+import {
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+  Button, Row, Col
+} from "reactstrap";
+import uuid from 'uuid/v1';
+import axios from 'axios';
+
+class ManageUsers extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        usersList: []
+    };
+  }
+
+  componentDidMount() {
+    let th = this;
+    axios.get('http://localhost:3001/getAllUsers')
+    .then(function (response) {
+      console.log(response.data)
+      th.setState({ usersList: response.data })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  deleteUser = (uid, name) => {
+    let th = this;
+    const body = {
+        id : uid,
+        name: name
+    }
+    axios.post('http://localhost:3001/deleteUser', body)
+    .then(function (response) {
+      th.setState({ usersList: response.data })
+      th.props.getAllUsers()
+    })
+    .catch(function (error) {
+     console.log(error);
+    });
+  }
+  render() {
+    const { usersList } = this.state;
+    return <article>
+        <Row>
+            <Col sm="6" lg="6">
+            <div> Manage Users </div>
+        <ListGroup>
+          {usersList && usersList.length > 0
+            ? usersList.map(user => {
+                return (
+                  <ListGroupItem color="success" key={uuid()}>
+                    <div className="sms-alert-list">
+                      <div>
+                        <ListGroupItemHeading>{user.displayName}</ListGroupItemHeading>
+                        <ListGroupItemText>{user.email}</ListGroupItemText>
+                      </div>
+                      <Button color="danger" onClick={() => this.deleteUser(user.uid, user.displayName)}>
+                        Delete
+                      </Button>
+                    </div>
+                  </ListGroupItem>
+                );
+              })
+            : "loading..."}
+        </ListGroup>
+        </Col>
+        </Row>
+    </article>;
+  }
+}
+
+export default ManageUsers;

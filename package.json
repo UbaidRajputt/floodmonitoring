@@ -9,11 +9,16 @@
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
+    "classnames": "^2.2.6",
     "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase": "^7.8.1",
+    "firebase-admin": "^8.9.2",
     "formik": "^2.1.4",
+    "http2": "^3.3.7",
     "leaflet": "^1.6.0",
+    "nodemon": "^2.0.2",
     "papaparse": "^5.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -22,12 +27,14 @@
     "react-scripts": "3.3.1",
     "react-toastify": "^5.5.0",
     "reactstrap": "^8.4.1",
+    "recharts": "^2.0.0-beta.1",
     "twilio": "^3.39.4",
-    "recharts": "^2.0.0-beta.1"
+    "uuid": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "cd Server && node server.js",
+    "build": "react-scripts build",
+    "server": "cd Server && nodemon server.js",
     "client": "npm start",
     "dev": "concurrently \"npm run server\" \"npm run start\""
   },

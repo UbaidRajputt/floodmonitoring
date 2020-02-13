@@ -1,0 +1,13 @@
+.sms-alert-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-group-item-heading {
+    font-weight: 500;
+}
+
+.list-group-item-text {
+    font-weight: 400;
+    color: red;
+}
