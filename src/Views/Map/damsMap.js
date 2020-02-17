@@ -5,8 +5,6 @@ import { Map, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import damPin from "../../Assets/dampin.png";
 import pakistanLocation from "../../Utilities/Constants/pakistan-geolocation.json";
 
-import { toast, ToastContainer } from 'react-toastify';
-
 export const pointerIcon = new leaflet.Icon({
   iconUrl: damPin,
   iconAnchor: [5, 40],
@@ -91,20 +89,14 @@ class DamsMap extends Component {
     };
   }
 
-  componentDidMount() {
-    toast.success("Successfully logged in!", {
-      position: toast.POSITION.TOP_RIGHT
-    });
-  }
   render() {
     return (
-      <div>
-        <ToastContainer />
+      <div className='out-map'>
       <Map
         maxZoom={19}
         padding={200}
         animate={true}
-        style={{ height: "88vh" }}
+        style={{ height: "100%" }}
         center={[30.3753, 69.3451]}
         zoom={this.state.zoom}
       >

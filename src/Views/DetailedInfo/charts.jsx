@@ -63,8 +63,6 @@ class Details extends Component {
           <button onClick={() => this.getData("weekly")} className={weekly ? 'button active' : "button"}>Weekly</button>
           <button onClick={() => this.getData("monthly")} className={montly ? 'button active' : "button"}>Monthly</button>
           <button onClick={() => this.getData("yearly")} className={yearly ? 'button active' : "button"}>Yearly</button>
-          
-         
         </div>
         <hr />
         <Row>
@@ -88,6 +86,7 @@ class Details extends Component {
               <Tables damName={damName} tableData={tableData} dataKeyBar={dataKeyBar} dataKeyLine={dataKeyLine} datakeyArea={datakeyArea} />
             </Col>
         </Row>
+        <div className='space-2p5rem'></div>
       </article>
     );
   }

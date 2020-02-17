@@ -38,7 +38,6 @@ header .navbar {
     color: var(--white);
     padding: 0;
 }
-
 .navbar-brand:hover,
 .navbar-brand:not([href]):hover {
     color: var(--white);

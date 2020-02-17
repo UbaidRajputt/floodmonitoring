@@ -87,31 +87,32 @@ class SmsAlerts extends Component {
     return (
       <div>
         <ToastContainer />
-        <article className='out-card'>
-        <Card>
-          <CardHeader>Send SMS Alerts</CardHeader>
-          <CardBody>
-          <ListGroup>
-          {usersList && usersList.length > 0
-            ? usersList.map(user => {
-                return (
-                  <ListGroupItem color="success" key={uuid()}>
-                    <div className="sms-alert-list">
-                      <div>
-                        <ListGroupItemHeading>{user.name}</ListGroupItemHeading>
-                        <ListGroupItemText>{user.phone}</ListGroupItemText>
-                      </div>
-                      <Button color="success" onClick={() => this.getUser(user.name, user.phone)}>
-                        Write Message
-                      </Button>
-                    </div>
-                  </ListGroupItem>
-                );
-              })
-            : "loading..."}
-        </ListGroup>
-        </CardBody>
-        </Card>
+        <article className='out-card no-cb-padd'>
+          <div className='space-2p5rem'></div>
+          <Card>
+            <CardHeader>Send SMS Alerts</CardHeader>
+            <CardBody className='h5h-scroll'>
+              <ListGroup>
+                {usersList && usersList.length > 0
+                  ? usersList.map(user => {
+                      return (
+                        <ListGroupItem color="success" key={uuid()}>
+                          <div className="sms-alert-list">
+                            <div>
+                              <ListGroupItemHeading>{user.name}</ListGroupItemHeading>
+                              <ListGroupItemText>{user.phone}</ListGroupItemText>
+                            </div>
+                            <Button color="success" onClick={() => this.getUser(user.name, user.phone)}>
+                              Write Message
+                            </Button>
+                          </div>
+                        </ListGroupItem>
+                      );
+                    })
+                  : "loading..."}
+              </ListGroup>
+            </CardBody>
+          </Card>
         </article>
         <div>
           <Modal isOpen={modal} toggle={this.toggle}>

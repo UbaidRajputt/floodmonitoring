@@ -11,6 +11,7 @@ import Login from "./Views/Auth/login";
 import firebase from "./Components/Firebase/firebaseSetup";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminPanel from "./Views/AdminPanel/admin";
+import EditProfile from "./Views/Profile/edit";
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class App extends Component {
               path="/charts/:name"
               component={Details}
             />
-            {/* <ProtectedRoute authenticated={authenticated} path="/admin" component={AdminPanel} /> */}
+            <ProtectedRoute authenticated={authenticated} path="/edit/:name" component={EditProfile} />
           </Switch>
         </Router>
       </div>

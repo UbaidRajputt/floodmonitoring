@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -36,7 +35,7 @@ class Header extends Component {
     return (
       <header>
         <Navbar color="dark" expand="md">
-          <NavbarBrand>Flood Monitoring System</NavbarBrand>
+          <Link className='navbar-brand' to='/home'>Flood Monitoring System</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <UncontrolledDropdown className='profile-dropdown'>
@@ -44,12 +43,20 @@ class Header extends Component {
                   <img className="avatar" src={userAvatar}  alt="userAvatar"/>
                 </DropdownToggle>
                 <DropdownMenu right>
-                <div className="username">
-                  {
-                    currentUser ? currentUser : "User"
+                  <div className="username">
+                    {
+                      currentUser ? currentUser : "User"
+                    }
+                  </div>
+                  <DropdownItem divider />
+                  {currentUser !== 'Admin' &&
+                    <Fragment>
+                      <DropdownItem>
+                        <Link to={`/edit/${currentUser}`}>Edit Profile</Link>
+                      </DropdownItem>
+                      <DropdownItem divider />
+                    </Fragment>
                   }
-                </div>
-                <DropdownItem divider />
                   <DropdownItem>
                     <Link onClick={() => firebase.auth().signOut()} to="/login">Logout</Link>
                   </DropdownItem>

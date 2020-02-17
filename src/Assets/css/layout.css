@@ -35,6 +35,12 @@ b {
   font-weight: 700;
 }
 
+.theme-container {
+  margin: 0 auto;
+  padding-right: var(--tPaddRL);
+  padding-left: var(--tPaddRL);
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -72,7 +78,9 @@ b {
 
 .themeBgDark > div {
   width: 100%;
-  max-width: 500px;
+  max-width: 530px;
+  padding-right: 15px;
+  padding-left: 15px;
   margin: 0 auto;
 }
 
@@ -110,8 +118,12 @@ b {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--white);
+  background-color: var(--notchColor);
   clip-path: var(--notch-outline);
+}
+
+.themeBgDark .txt-field:before {
+  background-color: var(--white);
 }
 
 .txt-field .form-control {
@@ -133,6 +145,14 @@ b {
   outline: 0;
 }
 
+a.button {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--headingColor);
+}
+a.button:hover {
+  color: var(--white);
+}
 button, .button {
   position: relative;
   border: 0;
@@ -152,9 +172,13 @@ button, .button {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--white);
+  background-color: var(--themeColor);
   clip-path: var(--notch-outline);
   z-index: -1;
+}
+
+.themeBgDark .button:before {
+  background-color: var(--white);
 }
 
 button:focus, .button:focus,
@@ -167,6 +191,9 @@ button:active:focus, .button:active:focus {
 
 .button:hover:before {
   clip-path: var(--notch-bg);
+}
+.button:hover {
+  color: var(--white);
 }
 
 .auth-form-outer .txt-plus-link {
@@ -216,4 +243,17 @@ main {
 }
 .chart-filter .button.active:before {
   clip-path: var(--notch-bg);
+}
+.out-map {
+  position: relative;
+  width: 100%;
+  height: var(--mHeight);
+}
+.button-row {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.button-row .button {
+  margin-right: 10px;
+  margin-left: 10px;
 }

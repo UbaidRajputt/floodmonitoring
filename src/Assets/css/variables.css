@@ -5,6 +5,7 @@
   --paraColor: #3E4751;
   --labelColor: #2A323A;
   --fieldColor: #2A323A;
+  --notchColor: #7992AA;
   --placeholderColor: #7992AA;
   --themeColor: #0867D5;
   --themeBgDark: #23394F;
@@ -24,4 +25,6 @@
   --hPaddRL: 50px;
   --hHeight: 50px;
   --fHeight: 50px;
+
+  --mHeight: calc(100vh - (var(--hHeight) + var(--fHeight)));
 }

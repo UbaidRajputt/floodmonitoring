@@ -13,13 +13,24 @@
 }
 
 .nav-tabs {
-    background: darkcyan;
+    background: var(--themeBgDark);
+    border-top: var(--themeBgDark) 8px solid;
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    border-bottom: 0;
 }
 
-.nav-item {
-    font-size: larger;
-    font-weight: bold;
+.nav-tabs .nav-item .nav-link,
+.nav-tabs .nav-item .nav-link:hover {
+    color: var(--white);
+}
+
+.nav-tabs .nav-item .nav-link.active,
+.nav-tabs .nav-item .nav-link.active:hover {
+    font-weight: 700;
+    color: var(--themeBgDark);
+}
+
+.space-2p5rem {
+    padding-top: 2.5rem;
 }

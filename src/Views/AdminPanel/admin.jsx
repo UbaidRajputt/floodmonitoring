@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import SmsAlerts from "./SmsAlerts";
 import ManageUsers from "./ManageUsers";
+import Landing from '../Landing/landing';
 
 class AdminPanel extends Component {
   constructor(props) {
@@ -72,26 +73,35 @@ class AdminPanel extends Component {
                 this.toggle("3");
               }}
             >
-              New Records
+              See Maps
             </NavLink>
           </NavItem>
         </Nav>
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
-            <Row>
-              <Col sm="1" lg="1" />
-              <Col sm="10" lg="10">
-              <SmsAlerts usersList={this.state.usersList} firebase={firebase}/>
-              </Col>
-            </Row>
+            <div className='theme-container'>
+              <Row>
+                <Col sm="1" lg="1" />
+                <Col sm="10" lg="10">
+                  <SmsAlerts usersList={this.state.usersList} firebase={firebase}/>
+                </Col>
+              </Row>
+            </div>
           </TabPane>
           <TabPane tabId="2">
+            <div className='theme-container'>
               <Row>
                 <Col sm="1" lg="1" />
                 <Col sm="10" lg="10">
                 <ManageUsers getAllUsers={this.getAllUsers} firebase={firebase} />
                 </Col>
               </Row>
+            </div>
+          </TabPane>
+          <TabPane tabId="3">
+            {
+              activeTab==="3" ? <Landing /> : null
+            }
           </TabPane>
         </TabContent>
       </article>

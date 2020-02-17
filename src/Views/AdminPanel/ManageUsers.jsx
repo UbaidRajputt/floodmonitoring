@@ -46,31 +46,32 @@ class ManageUsers extends Component {
   }
   render() {
     const { usersList } = this.state;
-    return <article className='out-card'>
-    <Card>
-      <CardHeader>Delete Users</CardHeader>
-      <CardBody>
-        <ListGroup>
-          {usersList && usersList.length > 0
-            ? usersList.map(user => {
-                return (
-                  <ListGroupItem color="success" key={uuid()}>
-                    <div className="sms-alert-list">
-                      <div>
-                        <ListGroupItemHeading>{user.displayName}</ListGroupItemHeading>
-                        <ListGroupItemText>{user.email}</ListGroupItemText>
+    return <article className='out-card no-cb-padd'>
+      <div className='space-2p5rem'></div>
+      <Card>
+        <CardHeader>Delete Users</CardHeader>
+        <CardBody className='h5h-scroll'>
+          <ListGroup>
+            {usersList && usersList.length > 0
+              ? usersList.map(user => {
+                  return (
+                    <ListGroupItem color="success" key={uuid()}>
+                      <div className="sms-alert-list">
+                        <div>
+                          <ListGroupItemHeading>{user.displayName}</ListGroupItemHeading>
+                          <ListGroupItemText>{user.email}</ListGroupItemText>
+                        </div>
+                        <Button color="danger" onClick={() => this.deleteUser(user.uid, user.displayName)}>
+                          Delete
+                        </Button>
                       </div>
-                      <Button color="danger" onClick={() => this.deleteUser(user.uid, user.displayName)}>
-                        Delete
-                      </Button>
-                    </div>
-                  </ListGroupItem>
-                );
-              })
-            : "loading..."}
-        </ListGroup>
+                    </ListGroupItem>
+                  );
+                })
+              : "loading..."}
+          </ListGroup>
         </CardBody>
-        </Card>
+      </Card>
     </article>;
   }
 }
