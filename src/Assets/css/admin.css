@@ -11,3 +11,15 @@
     font-weight: 400;
     color: red;
 }
+
+.nav-tabs {
+    background: darkcyan;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.nav-item {
+    font-size: larger;
+    font-weight: bold;
+}

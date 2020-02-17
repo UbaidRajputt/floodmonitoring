@@ -46,7 +46,7 @@ class Login extends Component {
                     .signInWithEmailAndPassword(values.email, values.password)
                     .then(user => {
                       if(user.user.email==="admin@admin.com"){
-                        this.props.history.push('/home');
+                        this.props.history.push('/admin');
                       }else{
                         this.props.history.push("/home"); 
                       }

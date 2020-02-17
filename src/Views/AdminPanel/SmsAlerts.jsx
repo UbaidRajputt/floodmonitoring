@@ -8,7 +8,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter, FormGroup, Label, Input
+  ModalFooter, FormGroup, Label, Input,
+  Card, CardBody, CardHeader
 } from "reactstrap";
 import uuid from "uuid/v1";
 import axios from "axios";
@@ -86,8 +87,11 @@ class SmsAlerts extends Component {
     return (
       <div>
         <ToastContainer />
-        <div> Send Flood Alerts </div>
-        <ListGroup>
+        <article className='out-card'>
+        <Card>
+          <CardHeader>Send SMS Alerts</CardHeader>
+          <CardBody>
+          <ListGroup>
           {usersList && usersList.length > 0
             ? usersList.map(user => {
                 return (
@@ -106,6 +110,9 @@ class SmsAlerts extends Component {
               })
             : "loading..."}
         </ListGroup>
+        </CardBody>
+        </Card>
+        </article>
         <div>
           <Modal isOpen={modal} toggle={this.toggle}>
             <ModalHeader toggle={this.toggle}>Write your message here!</ModalHeader>

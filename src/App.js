@@ -37,10 +37,11 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/" component={AdminPanel} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <ProtectedRoute authenticated={authenticated} path="/home" component={Landing} />
+            <ProtectedRoute authenticated={authenticated} path="/admin" component={AdminPanel} />
             <ProtectedRoute
               authenticated={authenticated}
               path="/charts/:name"

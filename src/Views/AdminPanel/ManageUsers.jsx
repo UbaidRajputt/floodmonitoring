@@ -4,7 +4,7 @@ import {
   ListGroupItem,
   ListGroupItemHeading,
   ListGroupItemText,
-  Button, Row, Col
+  Button, CardHeader, Card, CardBody
 } from "reactstrap";
 import uuid from 'uuid/v1';
 import axios from 'axios';
@@ -46,10 +46,10 @@ class ManageUsers extends Component {
   }
   render() {
     const { usersList } = this.state;
-    return <article>
-        <Row>
-            <Col sm="6" lg="6">
-            <div> Manage Users </div>
+    return <article className='out-card'>
+    <Card>
+      <CardHeader>Delete Users</CardHeader>
+      <CardBody>
         <ListGroup>
           {usersList && usersList.length > 0
             ? usersList.map(user => {
@@ -69,8 +69,8 @@ class ManageUsers extends Component {
               })
             : "loading..."}
         </ListGroup>
-        </Col>
-        </Row>
+        </CardBody>
+        </Card>
     </article>;
   }
 }

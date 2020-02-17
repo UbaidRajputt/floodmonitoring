@@ -45,8 +45,6 @@ class AdminPanel extends Component {
     return (
       <article>
         <Nav tabs>
-        <Row>
-        <Col sm="4">
           <NavItem>
             <NavLink
               className={classnames({ active: activeTab === "1" })}
@@ -57,8 +55,6 @@ class AdminPanel extends Component {
               Send Alerts
             </NavLink>
           </NavItem>
-          </Col>
-          <Col sm="4">
           <NavItem>
             <NavLink
               className={classnames({ active: activeTab === "2" })}
@@ -69,8 +65,6 @@ class AdminPanel extends Component {
               Manage Users
             </NavLink>
           </NavItem>
-          </Col>
-          <Col sm="4">
           <NavItem>
             <NavLink
               className={classnames({ active: activeTab === "3" })}
@@ -81,20 +75,23 @@ class AdminPanel extends Component {
               New Records
             </NavLink>
           </NavItem>
-          </Col>
-          </Row>
         </Nav>
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
             <Row>
-              <Col sm="2" lg="2" />
-              <Col sm="6" lg="6">
+              <Col sm="1" lg="1" />
+              <Col sm="10" lg="10">
               <SmsAlerts usersList={this.state.usersList} firebase={firebase}/>
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="2">
+              <Row>
+                <Col sm="1" lg="1" />
+                <Col sm="10" lg="10">
                 <ManageUsers getAllUsers={this.getAllUsers} firebase={firebase} />
+                </Col>
+              </Row>
           </TabPane>
         </TabContent>
       </article>
