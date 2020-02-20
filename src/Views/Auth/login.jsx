@@ -10,8 +10,15 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      admin: null
+      admin: null,
+      authenticated: false
     };
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticated => {
+      authenticated ? this.setState({ authenticated: true }) : this.setState({ authenticated: false });
+    });
   }
 
   render() {
