@@ -6,7 +6,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem, Nav, NavItem
 } from "reactstrap";
 import userAvatar from '../../Assets/user-avatar.png'
 import firebase from '../Firebase/firebaseSetup';
@@ -38,6 +38,14 @@ class Header extends Component {
           <Link className='navbar-brand' to='/home'>Flood Monitoring System</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <Link to="/weather">Weather</Link>
+            </NavItem>
+            <NavItem>
+            <Link to="/weather">Weather</Link>
+            </NavItem>
+            </Nav>
             <UncontrolledDropdown className='profile-dropdown'>
                 <DropdownToggle nav>
                   <img className="avatar" src={userAvatar}  alt="userAvatar"/>
@@ -58,7 +66,7 @@ class Header extends Component {
                     </Fragment>
                   }
                   <DropdownItem>
-                    <Link onClick={() => firebase.auth().signOut()} to="/login">Logout</Link>
+                    <Link onClick={() => { firebase.auth().signOut(); firebase.database().ref("AdminChats/").remove(); firebase.database().ref("UserChats/").remove();} } to="/login">Logout</Link>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

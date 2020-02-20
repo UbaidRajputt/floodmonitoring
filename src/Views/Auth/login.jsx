@@ -48,6 +48,9 @@ class Login extends Component {
                       if(user.user.email==="admin@admin.com"){
                         this.props.history.push('/admin');
                       }else{
+                        if( this.state.authenticated === true ){
+                          localStorage.setItem('auth', true)
+                        }
                         this.props.history.push("/home"); 
                       }
                     })

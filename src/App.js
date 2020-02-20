@@ -12,6 +12,7 @@ import firebase from "./Components/Firebase/firebaseSetup";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminPanel from "./Views/AdminPanel/admin";
 import EditProfile from "./Views/Profile/edit";
+import Weather from "./Views/Weather/Weather";
 
 class App extends Component {
   constructor(props) {
@@ -22,13 +23,7 @@ class App extends Component {
   }
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticated => {
-      authenticated
-        ? this.setState(() => ({
-            authenticated: true
-          }))
-        : this.setState(() => ({
-            authenticated: false
-          }));
+      (authenticated || localStorage.getItem('auth')) ? this.setState({ authenticated: true }) : this.setState({ authenticated: false });
     });
   }
 
@@ -49,6 +44,7 @@ class App extends Component {
               component={Details}
             />
             <ProtectedRoute authenticated={authenticated} path="/edit/:name" component={EditProfile} />
+            <ProtectedRoute authenticated={authenticated} path="/weather" component={Weather} />
           </Switch>
         </Router>
       </div>

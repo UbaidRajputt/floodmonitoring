@@ -13,14 +13,41 @@ import {
 import SmsAlerts from "./SmsAlerts";
 import ManageUsers from "./ManageUsers";
 import Landing from '../Landing/landing';
+import { Widget, addResponseMessage } from "react-chat-widget";
 
 class AdminPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
         activeTab: "1",
-        usersList: []
+        usersList: [],
+        messageList: []
     };
+  }
+
+  componentDidMount() {
+    this.setState({ currentUser: firebase.auth().currentUser})      
+    firebase.database().ref("UserChats/").on('value', message => {
+      //console.log(this.state.messageList, Object.values(message.val()))
+      this.setState({
+        messageList: message.val() ? Object.values(message.val()) : []
+      });
+    });
+  }
+
+  handleNewUserMessage = (newMessage) => {
+    firebase.database().ref("AdminChats/").push(newMessage);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+      console.log(prevState.messageList, this.state.messageList)
+      if(prevState.messageList !== this.state.messageList){
+        const filtered = this.state.messageList.filter( m => !prevState.messageList.includes(m))
+        filtered && filtered.map(l => {
+          
+            addResponseMessage(l);
+        })
+      }
   }
 
   toggle = (tab) => {
@@ -46,6 +73,7 @@ class AdminPanel extends Component {
     return (
       <article>
         <Nav tabs>
+        <Widget handleNewUserMessage={this.handleNewUserMessage} title="Flood Monitoring App" subtitle="Welcome" />
           <NavItem>
             <NavLink
               className={classnames({ active: activeTab === "1" })}

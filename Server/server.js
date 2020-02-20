@@ -82,15 +82,20 @@ app.post('/deleteUser', (req, res) => {
   });
 })
 
-app.post('/getUser', (req, res) => {
-  admin.auth().getUser(req.body.id)
-  .then(function(userRecord) {
-    console.log(userRecord.toJSON())
-    res.send(userRecord.toJSON())
+app.post('/editUser', (req, res) => {
+  const { name, password, phone, uid, email } = req.body;
+  admin.auth().updateUser(uid, {
+    password: password,
+    displayName: name,
   })
-  .catch(function(error) {
-    console.log('Error fetching user data:', error);
-  });
+    .then(function(userRecord) {
+      admin.database().ref("UserDetails/").child(userRecord.toJSON().displayName).update({ name: name, phone: phone, email: email }).then(() => {
+        res.send("User Updated Succesfully")
+      })
+    })
+    .catch(function(error) {
+      console.log('Error updating user:', error);
+    });
 })
 
 app.listen(3001, () => console.log("Established"));

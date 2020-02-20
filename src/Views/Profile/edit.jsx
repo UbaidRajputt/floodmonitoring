@@ -2,33 +2,81 @@ import React, { Component, Fragment } from 'react';
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { Row, Col, FormGroup, Label } from "reactstrap";
 import { Link } from "react-router-dom";
+import firebase from '../../Components/Firebase/firebaseSetup';
+import axios from 'axios';
+import { List } from 'react-content-loader'
+import { toast, ToastContainer } from 'react-toastify';
 
 class EditProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      userDetails: null
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ userDetails: firebase.auth().currentUser})
   }
 
   render() {
+    const { userDetails } = this.state;
     return (
       <Fragment>
         <div className='theme-container'>
+          {
+            userDetails ? 
           <article className='edit-profile'>
             <h3><b>Edit Profile</b></h3>
             <hr />
             <Formik
-              initialValues={{ name: "", password: "" }}
+              initialValues={{ name: userDetails ? userDetails.displayName : null, email: userDetails ? userDetails.email : null, phone: "", newPass: "", confirmPass: "" }}
               validate={values => {
                 const errors = {};
-                if (!values.name) {
-                  errors.name = "user name is required.";
+                
+                if (!values.phone){
+                  errors.phone = "phone number field is empty.";
+                } else if (!/^((\+92)|(0092))-{0,1}\d{3}-{0,1}\d{7}$|^\d{11}$|^\d{4}-\d{7}$/.test(values.phone)){
+                  errors.phone = "number is invalid, must start with +92";
+                }
+                if (!values.newPass) {
+                  errors.newPass = "password field is empty.";
+                }else if (values.newPass.length < 8) {
+                  errors.newPass = "password must be 8 digit.";
+                }
+                if(!values.confirmPass){
+                  errors.confirmPass = "password must be 8 digit.";
+                }
+                if (values.newPass !== values.confirmPass) {
+                  errors.confirmPass = "passwords don't match.";
                 }
                 return errors;
               }}
               onSubmit={(values, { setSubmitting }) => {
+              let th = this
+              const body = {
+                  uid: userDetails.uid,
+                  password: values.newPass,
+                  phone: values.phone,
+                  name: values.name,
+                  email: values.email
+              }
+              axios.post('http://localhost:3001/editUser', body)
+              .then(function (response) {
+                toast.success("User Updated Successfully!", {
+                  position: toast.POSITION.TOP_RIGHT
+                });
+                setTimeout(() => {
+                  th.props.history.push("/home")
+                }, 2000)
+              })
+              .catch(function (error) {
+               console.log(error);
+              });
               }}
             >
               <Form>
+                <ToastContainer />
                 <h5 className='title-bottom-space'>Basic Information</h5>
                 <Row>
                   <Col md={4}>
@@ -39,7 +87,7 @@ class EditProfile extends Component {
                           type="text"
                           name="name"
                           className="form-control"
-                          placeholder="Muhammad Kashif"
+                          placeholder="Fakhir"
                         />
                       </div>
                       <ErrorMessage
@@ -51,7 +99,7 @@ class EditProfile extends Component {
                   </Col>
                   <Col md={4}>
                     <FormGroup>
-                      <Label>Phone Number</Label>
+                      <Label>New Phone Number</Label>
                       <div className="txt-field">
                         <Field
                           type="text"
@@ -75,7 +123,7 @@ class EditProfile extends Component {
                           type="email"
                           name="email"
                           className="form-control"
-                          placeholder="kashif@gmail.com"
+                          placeholder="fakhir@gmail.com"
                           readOnly
                         />
                       </div>
@@ -87,35 +135,17 @@ class EditProfile extends Component {
                 <Row>
                   <Col md={4}>
                     <FormGroup>
-                      <Label>Old Password</Label>
-                      <div className="txt-field">
-                        <Field
-                          type="password"
-                          name="old"
-                          className="form-control"
-                          placeholder=""
-                        />
-                      </div>
-                      <ErrorMessage
-                        name="old"
-                        component="div"
-                        className="text-danger"
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={4}>
-                    <FormGroup>
                       <Label>New Password</Label>
                       <div className="txt-field">
                         <Field
                           type="password"
-                          name="new"
+                          name="newPass"
                           className="form-control"
                           placeholder=""
                         />
                       </div>
                       <ErrorMessage
-                        name="new"
+                        name="newPass"
                         component="div"
                         className="text-danger"
                       />
@@ -127,13 +157,13 @@ class EditProfile extends Component {
                       <div className="txt-field">
                         <Field
                           type="password"
-                          name="confirm"
+                          name="confirmPass"
                           className="form-control"
                           placeholder=""
                         />
                       </div>
                       <ErrorMessage
-                        name="confirm"
+                        name="confirmPass"
                         component="div"
                         className="text-danger"
                       />
@@ -148,6 +178,8 @@ class EditProfile extends Component {
               </Form>
             </Formik>
           </article>
+          : <List />
+          }
         </div>
       </Fragment>
     );
