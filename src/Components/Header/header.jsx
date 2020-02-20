@@ -6,11 +6,12 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem, Nav, NavItem, Badge
+  DropdownItem, Badge
 } from "reactstrap";
 import userAvatar from '../../Assets/user-avatar.png'
 import firebase from '../Firebase/firebaseSetup';
 import { Link } from "react-router-dom";
+import symbols from './../../Assets/svgs/symbols.svg';
 
 class Header extends Component {
   constructor(props) {
@@ -54,53 +55,39 @@ class Header extends Component {
     return (
       <header>
         <Navbar color="dark" expand="md">
-          <Link className='navbar-brand' to='/home'>Flood Monitoring System</Link>
+          <Link className='navbar-brand' to={currentUser === 'Admin' ? '/admin' : '/home'}>Flood Monitoring System</Link>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <Link to="/weather">Weather</Link>
-            </NavItem>
-            { currentUser!=="Admin" ?
-              <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret onClick={this.clearMessage}>
-                Notifications  {  newMessage ? <Badge>1</Badge> : <Badge>0</Badge>}
-              </DropdownToggle>
-              { newMessage ?
-              <DropdownMenu right>
-                  <DropdownItem>
-                  Admin sent a new message
-                  </DropdownItem>
-              </DropdownMenu>
-              : 
-              <DropdownMenu right>
-              <DropdownItem>
-              No new message
-              </DropdownItem>
-          </DropdownMenu> }
-            </UncontrolledDropdown>
-            :
-            <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret onClick={this.clearMessage}>
-              Notifications  {  messageNotif && messageNotif.length>0 ? <Badge>{messageNotif.length}</Badge> : <Badge>0</Badge>}
-            </DropdownToggle>
-            <DropdownMenu right>
-            { messageNotif && messageNotif.length>0 ?
-            messageNotif.map( m => (
-                <DropdownItem>
-                 {m}
-                </DropdownItem>
-            ))
-            
-            : 
-                <DropdownItem>
-               No Messages  Received
-                </DropdownItem>
+          <Collapse isOpen={isOpen} navbar className='head-nav'>
+              <Link className='nav-link' to="/weather"><svg width='24' height='24'><use xlinkHref={`${symbols}#weather`} /></svg></Link>
+              { currentUser!=="Admin" ?
+                <UncontrolledDropdown>
+                  <DropdownToggle nav onClick={this.clearMessage}>
+                    <svg width='23' height='24'><use xlinkHref={`${symbols}#notification`} /></svg> {  newMessage ? <Badge></Badge> : null}
+                  </DropdownToggle>
+                  { newMessage ?
+                    <DropdownMenu right>
+                      <DropdownItem>Admin sent a new message</DropdownItem>
+                    </DropdownMenu>
+                  : 
+                  <DropdownMenu right>
+                    <DropdownItem>No new message</DropdownItem>
+                  </DropdownMenu> }
+                </UncontrolledDropdown>
+              :
+              <UncontrolledDropdown>
+                <DropdownToggle nav onClick={this.clearMessage}>
+                  <svg width='26' height='28'><use xlinkHref={`${symbols}#notification`} /></svg> {  messageNotif && messageNotif.length>0 ? <Badge></Badge> : null}
+                </DropdownToggle>
+                <DropdownMenu right>
+                  { messageNotif && messageNotif.length>0 ?
+                    messageNotif.map( m => (
+                      <DropdownItem>{m}</DropdownItem>
+                  )) : 
+                      <DropdownItem>No Messages  Received</DropdownItem>
+                  }
+                </DropdownMenu>
+              </UncontrolledDropdown>
             }
-            </DropdownMenu>
-          </UncontrolledDropdown>
-          }
-            </Nav>
             <UncontrolledDropdown className='profile-dropdown'>
                 <DropdownToggle nav>
                   <img className="avatar" src={userAvatar}  alt="userAvatar"/>
