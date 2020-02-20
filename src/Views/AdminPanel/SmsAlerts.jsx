@@ -42,6 +42,7 @@ class SmsAlerts extends Component {
       .once("value", function(snapshot) {
         let users = snapshot.val() ? Object.values(snapshot.val()) : []
         users = [...new Map(users.map(item => [item["name"], item])).values()];
+        users = users.filter(u => u.email!=="admin@admin.com")
         th.setState({ usersList: users});
       });
   }

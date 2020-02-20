@@ -6,7 +6,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem, Nav, NavItem
+  DropdownItem, Nav, NavItem, Badge
 } from "reactstrap";
 import userAvatar from '../../Assets/user-avatar.png'
 import firebase from '../Firebase/firebaseSetup';
@@ -16,7 +16,9 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        currentUserUser : null
+        currentUserUser : null,
+        newMessage: false,
+        messageNotif: []
     };
   }
 
@@ -25,13 +27,30 @@ class Header extends Component {
     if(currentUser){
         this.setState({ currentUser })
     }
+    firebase.database().ref("Chats/").child(currentUser).child("Admin").on('value', message => {
+      this.setState({
+        newMessage: message.val() ? true : false
+      });
+    });
+    if(currentUser==="Admin"){
+      firebase.database().ref("Messages/").on('value', message => {
+        this.setState({
+          messageNotif: message.val() ? Object.values(message.val()) : []
+        });
+      });
+    }
   }
 
   toggle = () => {
       this.setState({ isOpen: !this.state.isOpen })
   }
+
+  /* clearMessage = () => {
+      this.setState({ newMessage: false })
+  } */
+
   render() {
-      const { isOpen, currentUser } = this.state;
+      const { isOpen, currentUser, newMessage, messageNotif } = this.state;
     return (
       <header>
         <Navbar color="dark" expand="md">
@@ -42,9 +61,45 @@ class Header extends Component {
             <NavItem>
               <Link to="/weather">Weather</Link>
             </NavItem>
-            <NavItem>
-            <Link to="/weather">Weather</Link>
-            </NavItem>
+            { currentUser!=="Admin" ?
+              <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret onClick={this.clearMessage}>
+                Notifications  {  newMessage ? <Badge>1</Badge> : <Badge>0</Badge>}
+              </DropdownToggle>
+              { newMessage ?
+              <DropdownMenu right>
+                  <DropdownItem>
+                  Admin sent a new message
+                  </DropdownItem>
+              </DropdownMenu>
+              : 
+              <DropdownMenu right>
+              <DropdownItem>
+              No new message
+              </DropdownItem>
+          </DropdownMenu> }
+            </UncontrolledDropdown>
+            :
+            <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret onClick={this.clearMessage}>
+              Notifications  {  messageNotif && messageNotif.length>0 ? <Badge>{messageNotif.length}</Badge> : <Badge>0</Badge>}
+            </DropdownToggle>
+            <DropdownMenu right>
+            { messageNotif && messageNotif.length>0 ?
+            messageNotif.map( m => (
+                <DropdownItem>
+                 {m}
+                </DropdownItem>
+            ))
+            
+            : 
+                <DropdownItem>
+               No Messages  Received
+                </DropdownItem>
+            }
+            </DropdownMenu>
+          </UncontrolledDropdown>
+          }
             </Nav>
             <UncontrolledDropdown className='profile-dropdown'>
                 <DropdownToggle nav>
@@ -66,7 +121,7 @@ class Header extends Component {
                     </Fragment>
                   }
                   <DropdownItem>
-                    <Link onClick={() => { firebase.auth().signOut(); firebase.database().ref("AdminChats/").remove(); firebase.database().ref("UserChats/").remove();} } to="/login">Logout</Link>
+                    <Link onClick={() => { firebase.auth().signOut(); firebase.database().ref("Chats/").child(currentUser).remove(); }} to="/login">Logout</Link>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import DamsMap from "../Map/damsMap";
-import { Widget, addResponseMessage } from "react-chat-widget";
+import { Widget, addResponseMessage, dropMessages } from "react-chat-widget";
 import firebase from '../../Components/Firebase/firebaseSetup';
 
 class Landing extends Component {
@@ -13,8 +13,9 @@ class Landing extends Component {
   }
 
   componentDidMount() {
+      dropMessages()
       this.setState({ currentUser: firebase.auth().currentUser})      
-      firebase.database().ref("AdminChats/").on('value', message => {
+      firebase.database().ref("Chats/").child(firebase.auth().currentUser.displayName).child("Admin").on('value', message => {
         this.setState({
           list: message.val() ? Object.values(message.val()) : []
         });
@@ -22,7 +23,8 @@ class Landing extends Component {
   }
 
   handleNewUserMessage = (newMessage) => {
-    firebase.database().ref("UserChats/").push(newMessage);
+    firebase.database().ref("Chats/").child(this.state.currentUser.displayName).child(this.state.currentUser.displayName).push(newMessage);
+    firebase.database().ref("Messages/").push(`${this.state.currentUser.displayName} sent a message`);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -37,7 +39,7 @@ class Landing extends Component {
   render() {
     return (
       <Fragment>
-        <Widget handleNewUserMessage={this.handleNewUserMessage} title="Flood Monitoring App" subtitle="Welcome" />
+        <Widget handleNewUserMessage={this.handleNewUserMessage} title="Flood Monitoring App" subtitle={`Welcome ${this.state.currentUser && this.state.currentUser.displayName}`} />
         <DamsMap />
       </Fragment>
     );

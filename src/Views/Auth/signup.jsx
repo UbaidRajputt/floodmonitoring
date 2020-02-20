@@ -60,7 +60,7 @@ class SignUp extends Component {
                           .auth()
                           .currentUser.updateProfile({
                             displayName: values.name,
-                            phoneNumber: values.phone
+                            phoneNumber: values.phone,
                           })
                           .then(s => {
                             firebase

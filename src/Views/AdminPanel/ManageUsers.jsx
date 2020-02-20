@@ -21,8 +21,8 @@ class ManageUsers extends Component {
     let th = this;
     axios.get('http://localhost:3001/getAllUsers')
     .then(function (response) {
-      console.log(response.data)
-      th.setState({ usersList: response.data })
+      let users = response.data.filter(u => u.email!=="admin@admin.com")
+      th.setState({ usersList: users })
     })
     .catch(function (error) {
       console.log(error);
