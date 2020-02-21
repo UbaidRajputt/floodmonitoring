@@ -264,3 +264,31 @@ main {
   margin-right: 10px;
   margin-left: 10px;
 }
+.space-2p5rem {
+  padding-top: 2.5rem;
+}
+/* over write rcw plugin */
+.rcw-widget-container {
+  z-index: 1111;
+}
+.rcw-launcher {
+  background-color: var(--themeColor);
+  padding: 0;
+}
+.rcw-conversation-container .rcw-header {
+  background-color: var(--themeColor);
+}
+.rcw-title {
+  font-weight: 700;
+  color: var(--white);
+}
+.rcw-header > span {
+  color: var(--whiteLite);
+}
+.rcw-client {
+  background-color: var(--notchColor);
+  color: var(--white);
+}
+.rcw-client p {
+  color: var(--white);
+}

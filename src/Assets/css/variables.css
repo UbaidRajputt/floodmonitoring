@@ -1,5 +1,6 @@
 :root {
   --white: #ffffff;
+  --whiteLite: rgba(255, 255, 255, 0.7);
   --black: #000000;
   --headingColor: #131A21;
   --paraColor: #3E4751;
@@ -27,4 +28,5 @@
   --fHeight: 50px;
 
   --mHeight: calc(100vh - (var(--hHeight) + var(--fHeight)));
+  --cardGradient: -webkit-radial-gradient(50% 50%, circle farthest-corner, rgba(8, 103, 213, 1) 0%, rgba(35, 57, 79, 1) 100%);
 }

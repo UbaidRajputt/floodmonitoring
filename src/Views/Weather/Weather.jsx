@@ -10,7 +10,7 @@ class Weather extends Component {
   render() {
     return (
       <div className='theme-container'>
-        <h2>Weather Report for Dams</h2>
+        <h2>Dam's Weather Report</h2>
         <Row>
           <Col lg={3}>
             <WeatherCard 

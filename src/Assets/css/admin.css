@@ -30,24 +30,3 @@
     font-weight: 700;
     color: var(--themeBgDark);
 }
-
-.space-2p5rem {
-    padding-top: 2.5rem;
-}
-
-.rcw-widget-container {
-    z-index: 1111;
-}
-
-.rcw-launcher {
-    padding: inherit;
-    background-color: darkslateblue;
-}
-
-.rcw-conversation-container .rcw-header {
-    background-color: darkslateblue
-}
-
-.rcw-client {
-    background-color: cornflowerblue;
-}

@@ -43,8 +43,8 @@ export const WeatherCard = ({ damName, currentLat, currentLong }) => {
         <div className='dam-title'>{damName}<br /><small>(&nbsp;{weatherData.name}&nbsp;)</small></div>
         <div className='weather-date'>{todayDate}</div>
         <hr />
-        <h3 className='weather-temp'><b>{weatherData.main.temp} F</b></h3>
-        <div className='weather-temp-range'>{weatherData.main.temp_max} / {weatherData.main.temp_min} F</div>
+        <h3 className='weather-temp'><b>{parseInt(weatherData.main.temp - 273.15)}&nbsp;°C</b></h3>
+        <div className='weather-temp-range'>{parseInt(weatherData.main.temp_max - 273.15)}&nbsp;°C&nbsp;/&nbsp;{parseInt(weatherData.main.temp_min - 273.15)}&nbsp;°C</div>
         <div className='weather-desc'>{svgSymbol} {weatherData.weather[0].description}</div>
         <hr />
         <div className='wind-speed'>Wind Speed: <b>{weatherData.wind.speed}</b> km/h</div>
