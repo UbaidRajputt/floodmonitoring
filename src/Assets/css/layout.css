@@ -41,6 +41,13 @@ b {
   padding-left: var(--tPaddRL);
 }
 
+.theme-container > h2 {
+  font-weight: 600;
+  color: var(--headingColor);
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
 .uppercase {
   text-transform: uppercase;
 }

@@ -58,10 +58,10 @@ class Header extends Component {
           <Link className='navbar-brand' to={currentUser === 'Admin' ? '/admin' : '/home'}>Flood Monitoring System</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar className='head-nav'>
-              <Link className='nav-link' to="/weather"><svg width='24' height='24'><use xlinkHref={`${symbols}#weather`} /></svg></Link>
+              <Link className='nav-link' to="/weather" title='Weather'><svg width='24' height='24'><use xlinkHref={`${symbols}#weather`} /></svg></Link>
               { currentUser!=="Admin" ?
                 <UncontrolledDropdown>
-                  <DropdownToggle nav onClick={this.clearMessage}>
+                  <DropdownToggle nav onClick={this.clearMessage} title='Notification'>
                     <svg width='23' height='24'><use xlinkHref={`${symbols}#notification`} /></svg> {  newMessage ? <Badge></Badge> : null}
                   </DropdownToggle>
                   { newMessage ?
@@ -75,7 +75,7 @@ class Header extends Component {
                 </UncontrolledDropdown>
               :
               <UncontrolledDropdown>
-                <DropdownToggle nav onClick={this.clearMessage}>
+                <DropdownToggle nav onClick={this.clearMessage} title='Notification'>
                   <svg width='26' height='28'><use xlinkHref={`${symbols}#notification`} /></svg> {  messageNotif && messageNotif.length>0 ? <Badge></Badge> : null}
                 </DropdownToggle>
                 <DropdownMenu right>

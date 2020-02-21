@@ -30,7 +30,8 @@
 }
 
 .weather-card {
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   background-color: var(--themeBgDark);
   display: flex;
   align-items: center;
@@ -64,8 +65,16 @@
   color: rgba(255, 255, 255, 0.7);
 }
 .weather-desc {
+  display: flex;
+  align-items: center;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.7);
+}
+.weather-desc svg {
+  fill: rgba(255, 255, 255, 0.9);
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
 .wind-speed {
   font-size: 14px;
@@ -74,4 +83,13 @@
 .humidity {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
+}
+.weather-main p {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+.weather-main p svg {
+  width: 70px;
+  height: 70px;
+  fill: var(--white);
 }
