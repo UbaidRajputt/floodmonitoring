@@ -292,3 +292,5 @@ main {
 .rcw-client p {
   color: var(--white);
 }
+
+.recharts-cartesian-axis { font-family: sans-serif; font-size: 15px; font-weight: 600;}

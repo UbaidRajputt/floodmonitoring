@@ -51,9 +51,9 @@ class Details extends Component {
     const { data, weekly, montly, yearly, damName } = this.state;
     let tableData = JSON.parse(JSON.stringify(data).replace(/\s/g, ''));
     tableData = JSON.parse(JSON.stringify(tableData).replace(/[()]/g, ''));
-    const dataKeyBar = damName==="Mangala Dam" ? "Jehlum at Mangla Inflow" : damName==="Tarbela Dam" ? "Indus at Tarbela Inflow" : damName==="Nowshera Dam" ? "Kabul Inflow at Nowshera": ""
-    const dataKeyLine = damName==="Mangala Dam" ? "Jehlum at Mangla Outflow" : damName==="Tarbela Dam" ? "Indus at Tarbela Outflow" : ""
-    const datakeyArea = damName==="Mangala Dam" ? "Jehlum at Mangla Levels(feet)" : damName==="Tarbela Dam" ? "Indus at Tarbela Levels(feet)" : ""
+    const dataKeyBar = damName==="Mangala Dam" ? "Jehlum at Mangla Inflow" : damName==="Tarbela Dam" ? "Indus at Tarbela Inflow" : damName==="Nowshera Dam" ? "Kabul Inflow at Nowshera": damName==="Head Marala" ? "Chenab Inflow at Marala": ""
+    const dataKeyLine = damName==="Mangala Dam" ? "Jehlum at Mangla Outflow" : damName==="Tarbela Dam" ? "Indus at Tarbela Outflow" : damName==="Head Marala" ? "Chenab Outflow at Marala" :""
+    const datakeyArea = damName==="Mangala Dam" ? "Jehlum at Mangla Levels(feet)" : damName==="Tarbela Dam" ? "Indus at Tarbela Levels(feet)" : damName==="Head Marala" ? "Chenab at Marala Levels(Feet)" : ""
 
     return (
       <article className='board'>
@@ -67,18 +67,18 @@ class Details extends Component {
         <hr />
         <Row>
           <Col sm={6} lg={6}>
-            <Barchart title={damName +" Inflows"} data={data} data1={dataKeyBar} color="#F1C40F"/>
+            <Barchart xlabel="Period Time"  ylabel="Inflows"  title={damName +" Inflows"} data={data} data1={dataKeyBar} color="#F1C40F"/>
           </Col>
           <Col sm={6} lg={6}>
-            <Linechart title={damName +" Outflows"} data={data} data1={dataKeyLine} color="#c0392b"/>
+            <Barchart xlabel="Period Time"  ylabel="Outflows" title={damName +" Outflows"} data={data} data1={dataKeyLine} color="#c0392b"/>
           </Col>
         </Row>
         <Row>
           <Col sm={6} lg={6}>
-            <Areachart title={damName +" Levels"} data={data} data1={datakeyArea} color="#2ecc71"/>
+            <Areachart xlabel="Period Time"  ylabel="Levels"  title={damName +" Levels"} data={data} data1={datakeyArea} color="#2ecc71"/>
           </Col>
           <Col sm={6} lg={6}>
-            <StackBar title={damName +" Current Year Trends"} data={data} data1="System Inflows Current Year" data2="System Inflows Last Year" data3="System Inflows This Decade" color1="#2980B9" color2="#34495E" color3="#E74C3C" />
+            <StackBar xlabel="Period Time"  ylabel="Trends" title={damName +" Current Year Trends"} data={data} data1="System Inflows Current Year" data2="System Inflows Last Year" data3="System Inflows This Decade" color1="#2980B9" color2="#34495E" color3="#E74C3C" />
           </Col>
         </Row>
         <Row>

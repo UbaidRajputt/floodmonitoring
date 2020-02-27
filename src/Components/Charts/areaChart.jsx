@@ -10,20 +10,21 @@ class Areachart extends PureComponent {
   }
 
   render() {
-    const { title, chartMargin, data, data1, color } = this.props;
+    const { title, chartMargin, data, data1, color, xlabel, ylabel } = this.props;
     return (
       <article className='out-card'>
         <Card>
-          <CardHeader>{title}</CardHeader>
+          <CardHeader>{title} (feet)</CardHeader>
           <CardBody>
             <ResponsiveContainer>
               <AreaChart
               data={data}
-              margin={chartMargin}
+              margin={{ top: 15, right: 0, left: 40, bottom: 30 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="Period Date" />
-              <YAxis />
+              <XAxis dataKey="Period Date" label={{ value:xlabel, angle: 180, position: "insideBottomLeft", dy: 7}}> 
+              </XAxis>
+              <YAxis label={{ value: ylabel, angle: -90, position: 'insideLeft', dx:-40 }}/>
               <Tooltip />
               <Area type="monotone" dataKey={data1} stroke="#8884d8" fill={color} />
             </AreaChart>

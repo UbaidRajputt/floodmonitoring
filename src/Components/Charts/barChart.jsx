@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Card, CardHeader, CardBody } from 'reactstrap';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,Label } from 'recharts';
 
 class Barchart extends PureComponent {
 
@@ -10,20 +10,23 @@ class Barchart extends PureComponent {
   }
 
   render() {
-    const { title, chartMargin, data, data1, color } = this.props;
+    const { title, chartMargin, data, data1, color, xlabel, ylabel } = this.props;
     return (
       <article className='out-card'>
         <Card>
-          <CardHeader>{title}</CardHeader>
+          <CardHeader>{title} (acre-foot)</CardHeader>
           <CardBody>
             <ResponsiveContainer>
               <BarChart
                 data={data}
-                margin={chartMargin}
+                margin={{ top: 15, right: 0, left: 40, bottom: 30 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="Period Date" />
-                <YAxis />
+                <XAxis dataKey="Period Date"  label={{ value:xlabel, angle: 180, position: "insideBottomLeft", dy: 7}}>
+                </XAxis>
+                <YAxis label={{ value: ylabel, angle: -90, position: 'insideLeft', dx:-40 }} >
+                </YAxis>
+
                 <Tooltip />
                 <Legend />
                 <Bar dataKey={data1} fill={color} />

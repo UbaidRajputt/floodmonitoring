@@ -10,7 +10,7 @@ class StackBar extends PureComponent {
   }
 
   render() {
-    const { title, chartMargin, data, data1, data2, data3, color1, color2, color3 } = this.props;
+    const { title, data, data1, data2, data3, color1, color2, color3, xlabel, ylabel } = this.props;
     return (
       <article className='out-card'>
         <Card>
@@ -19,11 +19,11 @@ class StackBar extends PureComponent {
             <ResponsiveContainer>
               <BarChart
                 data={data}
-                margin={chartMargin}
+                margin={{ top: 15, right: 0, left: 40, bottom: 30 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="Period Date" />
-                <YAxis />
+                <XAxis dataKey="Period Date" label={{ value:xlabel, angle: 180, position: "insideBottomLeft", dy: 7}}/>
+                <YAxis  label={{ value: ylabel, angle: -90, position: 'insideLeft', dx:-40 }}/>
                 <Tooltip />
                 <Legend />
                 <Bar stackId="a" dataKey={data1} fill={color1} />

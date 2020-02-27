@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
 import leaflet, { LatLngBounds } from "leaflet";
-import { Map, TileLayer, Marker, Popup, GeoJSON,WMSTileLayer  } from "react-leaflet";
+import { Map, TileLayer, Marker, Popup, GeoJSON  } from "react-leaflet";
 import damPin from "../../Assets/mapPin.svg";
 import pakistanLocation from "../../Utilities/Constants/pakistan-geolocation.json";
 
@@ -19,12 +19,14 @@ const markers = [
     key: "marker1",
     position: [34.0105, 71.9876],
     content: "Nowshera Dam",
+    inflowData: "Inflow is 22.5",
     icon: pointerIcon
   },
   {
     key: "marker2",
-    position: [25.2442, 67.1128],
-    content: "Hub Dam",
+    position: [32.6724, 74.4644],
+    content: "Head Marala",
+    inflowData: "Inflow is 13.4",
     icon: pointerIcon
   },
   {
@@ -37,6 +39,7 @@ const markers = [
     key: "marker4",
     position: [33.1406, 73.6426],
     content: "Mangala Dam",
+    inflowData: "Inflow is 23.8",
     icon: pointerIcon
   },
   {
@@ -55,6 +58,7 @@ const markers = [
     key: "marker7",
     position: [34.0875, 72.699],
     content: "Tarbela Dam",
+    inflowData: "Inflow is 25",
     icon: pointerIcon
   },
   {
@@ -65,10 +69,12 @@ const markers = [
   }
 ];
 
-const MyPopupMarker = ({ content, position, icon }) => (
+const MyPopupMarker = ({ content, position, icon, inflowData }) => (
   <Marker position={position} icon={icon}>
     <Popup>
       <h3>{content}</h3>
+      <b style={{ fontSize: "17px" }}>{inflowData}</b>
+      <hr/>
       <Link to={"/charts/"+content}>See detailed Info...</Link>
     </Popup>
   </Marker>
@@ -100,8 +106,8 @@ class DamsMap extends Component {
         center={[30.3753, 69.3451]}
         zoom={this.state.zoom}
       >
-       <TileLayer attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
-       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+      <TileLayer attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
+       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/> 
         <GeoJSON
           data={pakistanLocation}
           style={() => ({
@@ -109,7 +115,8 @@ class DamsMap extends Component {
             weight: 3,
             fillColor: "green",
             fillOpacity: 0.6,
-            opacity: 1
+            opacity: 1,
+            
           })}
         />
         <MyMarkersList markers={markers} />
