@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
-import leaflet from "leaflet";
-import { Map, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
-import damPin from "../../Assets/dampin.png";
+import leaflet, { LatLngBounds } from "leaflet";
+import { Map, TileLayer, Marker, Popup, GeoJSON,WMSTileLayer  } from "react-leaflet";
+import damPin from "../../Assets/mapPin.svg";
 import pakistanLocation from "../../Utilities/Constants/pakistan-geolocation.json";
 
 export const pointerIcon = new leaflet.Icon({
   iconUrl: damPin,
   iconAnchor: [5, 40],
   popupAnchor: [10, -44],
-  iconSize: [32, 52],
+  iconSize: [24, 41],
   shadowSize: [68, 95],
   shadowAnchor: [20, 92]
 });
@@ -100,10 +100,8 @@ class DamsMap extends Component {
         center={[30.3753, 69.3451]}
         zoom={this.state.zoom}
       >
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png"
-        />
+       <TileLayer attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
+       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
         <GeoJSON
           data={pakistanLocation}
           style={() => ({
