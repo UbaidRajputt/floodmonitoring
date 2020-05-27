@@ -12,6 +12,9 @@ import userAvatar from '../../Assets/user-avatar.png'
 import firebase from '../Firebase/firebaseSetup';
 import { Link } from "react-router-dom";
 import symbols from './../../Assets/svgs/symbols.svg';
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+import Predictions from '../../Assets/Images/prediction.png';
+
 
 class Header extends Component {
   constructor(props) {
@@ -46,19 +49,32 @@ class Header extends Component {
       this.setState({ isOpen: !this.state.isOpen })
   }
 
-  /* clearMessage = () => {
-      this.setState({ newMessage: false })
-  } */
-
   render() {
       const { isOpen, currentUser, newMessage, messageNotif } = this.state;
+      
     return (
       <header>
         <Navbar color="dark" expand="md">
           <Link className='navbar-brand' to={currentUser === 'Admin' ? '/admin' : '/home'}>Flood Monitoring System</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar className='head-nav'>
+              <div style={{ margin: "0px 10px" }}>
+                <BootstrapSwitchButton checked={true} onstyle="primary" size="xs"
+                 onlabel='Layer Map'
+                 offlabel='Image Map'
+                 onChange={(checked) => {
+                    if(checked){
+                      this.props.getMapView("MapLayer")
+                    }else{
+                      this.props.getMapView("ImageLayer")
+                    }
+                 }}
+                 width={100}
+                 height={30}
+                />
+                </div>
               <Link className='nav-link' to="/weather" title='Weather'><svg width='24' height='24'><use xlinkHref={`${symbols}#weather`} /></svg></Link>
+              <Link className='nav-link' to="/predictions" title='Predictions'><img width='24' height='24' src={Predictions}  alt="pred"/></Link>
               { currentUser!=="Admin" ?
                 <UncontrolledDropdown>
                   <DropdownToggle nav onClick={this.clearMessage} title='Notification'>

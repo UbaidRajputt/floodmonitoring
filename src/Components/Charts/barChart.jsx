@@ -19,16 +19,16 @@ class Barchart extends PureComponent {
             <ResponsiveContainer>
               <BarChart
                 data={data}
-                margin={{ top: 15, right: 0, left: 40, bottom: 30 }}
+                margin={{ top: 15, right: 80, left: 60, bottom: 30 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="Period Date"  label={{ value:xlabel, angle: 180, position: "insideBottomLeft", dy: 7}}>
+                <XAxis dataKey="Period Date"  label={{ value:xlabel, angle: 0, position: "insideBottomLeft", dy: 10}}>
                 </XAxis>
                 <YAxis label={{ value: ylabel, angle: -90, position: 'insideLeft', dx:-40 }} >
                 </YAxis>
 
                 <Tooltip />
-                <Legend />
+                <Legend margin="20px"/>
                 <Bar dataKey={data1} fill={color} />
               </BarChart>
             </ResponsiveContainer>

@@ -19,13 +19,13 @@ class StackBar extends PureComponent {
             <ResponsiveContainer>
               <BarChart
                 data={data}
-                margin={{ top: 15, right: 0, left: 40, bottom: 30 }}
+                margin={{ top: 15, right: 80, left: 60, bottom: 30 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="Period Date" label={{ value:xlabel, angle: 180, position: "insideBottomLeft", dy: 7}}/>
+                <XAxis dataKey="Period Date" label={{ value:xlabel, angle: 0, position: "insideBottomLeft", dy: 10}}/>
                 <YAxis  label={{ value: ylabel, angle: -90, position: 'insideLeft', dx:-40 }}/>
                 <Tooltip />
-                <Legend />
+                <Legend margin="20px"/>
                 <Bar stackId="a" dataKey={data1} fill={color1} />
                 <Bar stackId="a" dataKey={data2} fill={color2} />
                 <Bar stackId="a" dataKey={data3} fill={color3} />

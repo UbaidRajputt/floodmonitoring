@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import DamsMap from "../Map/damsMap";
 import { Widget, addResponseMessage, dropMessages } from "react-chat-widget";
 import firebase from '../../Components/Firebase/firebaseSetup';
+import ImageMap from "../Map/ImageMap";
 
 class Landing extends Component {
   constructor(props) {
@@ -37,10 +38,16 @@ class Landing extends Component {
   }
 
   render() {
+    console.log(this.props.mapType)
     return (
       <Fragment>
         <Widget handleNewUserMessage={this.handleNewUserMessage} title="Flood Monitoring App" subtitle={`Welcome ${this.state.currentUser && this.state.currentUser.displayName}`} />
-        <DamsMap />
+        {
+          this.props.mapType === "MapLayer"?
+          <DamsMap />
+          :
+          <ImageMap />
+        }
       </Fragment>
     );
   }

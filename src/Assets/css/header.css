@@ -113,3 +113,12 @@ header .navbar {
     color: aliceblue;
     text-decoration: none;
 }
+
+
+.switch-on.btn.btn-primary.btn-xs{
+    line-height: calc(16px) !important;
+}
+
+.switch-off.btn.btn-light.btn-xs{
+    line-height: calc(16px) !important;
+}

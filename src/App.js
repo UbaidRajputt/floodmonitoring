@@ -13,18 +13,24 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminPanel from "./Views/AdminPanel/admin";
 import EditProfile from "./Views/Profile/edit";
 import Weather from "./Views/Weather/Weather";
+import Predictions from "./Views/Predictions/Predictions";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticated: false
+      authenticated: false,
+      mapType: "MapLayer"
     };
   }
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticated => {
       (authenticated || localStorage.getItem('auth')) ? this.setState({ authenticated: true }) : this.setState({ authenticated: false });
     });
+  }
+
+  getMapView = (mapType) => {
+    this.setState({ mapType })
   }
 
   render() {
@@ -36,12 +42,17 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
-            <ProtectedRoute authenticated={authenticated} path="/home" component={Landing} />
-            <ProtectedRoute authenticated={authenticated} path="/admin" component={AdminPanel} />
+            <ProtectedRoute authenticated={authenticated} getMapView={this.getMapView} mapType={this.state.mapType} path="/home" component={Landing} />
+            <ProtectedRoute authenticated={authenticated} getMapView={this.getMapView} mapType={this.state.mapType} path="/admin" component={AdminPanel} />
             <ProtectedRoute
               authenticated={authenticated}
               path="/charts/:name"
               component={Details}
+            />
+            <ProtectedRoute
+              authenticated={authenticated}
+              path="/predictions"
+              component={Predictions}
             />
             <ProtectedRoute authenticated={authenticated} path="/edit/:name" component={EditProfile} />
             <ProtectedRoute authenticated={authenticated} path="/weather" component={Weather} />
